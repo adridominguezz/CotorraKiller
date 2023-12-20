@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CotorrasKiller</string>
+    <string name="login">LOGIN</string>
+    <string name="registro">REGISTRO</string>
 </resources>
