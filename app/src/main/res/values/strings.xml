@@ -2,4 +2,10 @@
     <string name="app_name">CotorrasKiller</string>
     <string name="login">LOGIN</string>
     <string name="registro">REGISTRO</string>
+    <string name="name">NOMBRE</string>
+    <string name="email">EMAIL</string>
+    <string name="password">CONTRASEÑA</string>
+    <string name="confirm_password">CONFIRMAR CONTRASEÑA</string>
+    <string name="iniciar_sesion">INICIAR SESIÓN</string>
+    <string name="registrar">REGISTRAR</string>
 </resources>
