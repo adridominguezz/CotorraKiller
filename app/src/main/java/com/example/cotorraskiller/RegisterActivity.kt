@@ -19,6 +19,9 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import org.checkerframework.checker.nullness.qual.NonNull
+import java.sql.Connection
+import java.sql.PreparedStatement
+import java.sql.SQLException
 import kotlin.math.log
 
 class RegisterActivity : AppCompatActivity() {
@@ -29,10 +32,12 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var editTextConfirmPassword: EditText
     private lateinit var btnRegistro: Button
     private lateinit var auth: FirebaseAuth
+    private var connectSql = ConnectSql()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+
 
         auth = Firebase.auth
         btnRegistro = findViewById(R.id.registerBtn)
@@ -43,9 +48,12 @@ class RegisterActivity : AppCompatActivity() {
         //Escucha el boton de registro
         btnRegistro.setOnClickListener {
             //Convierte en Strings los textos dentro de los campos editText
+            val name = editTextName.text.toString()
             val logEmail = editTextEmail.text.toString()
             val logPassword = editTextPassword.text.toString()
             val logConfirmPassword = editTextConfirmPassword.text.toString()
+
+            registerUser(logEmail, logPassword, name)
 
             //Comprueba que los campos de email y contraseña no están vacios y que los campos de contraseña y confirmar contraseña sean iguales
             if ((checkEmpty(logEmail, logPassword)) && (logPassword == logConfirmPassword)){
@@ -59,11 +67,30 @@ class RegisterActivity : AppCompatActivity() {
                         editTextPassword.setFocusable(true)
 
                 } else{ //Si pasa las anteriores comprobaciones, pasa a registrar el jugador
-                    RegistrarJugador(logEmail, logPassword);
+
+                    registerUser(logEmail, logPassword, name)
+
+                    //RegistrarJugador(logEmail, logPassword);
+
+
                 }
             }
         }
     }
+
+    private fun registerUser(logEmail: String, logPassword: String, name: String) {
+        try {
+            val addUser: PreparedStatement = connectSql.dbConn()?.prepareStatement("INSERT INTO Players (email, password, name) VALUES ('?', '?', '?')")!!
+                addUser.setString(1,logEmail)
+                addUser.setString(2, logPassword)
+                addUser.setString(3, name)
+                addUser.executeUpdate()
+            Toast.makeText(this, "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
+        }catch (ex: SQLException){
+            Toast.makeText(this, "Error al crear usuario", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     private fun RegistrarJugador(logEmail: String, logPassword: String) {
         auth.createUserWithEmailAndPassword(logEmail, logPassword)
@@ -117,6 +144,7 @@ class RegisterActivity : AppCompatActivity() {
             }
 
     }
+
 
     private fun checkEmpty(logEmail: String, logPassword: String): Boolean {
         return logEmail.isNotEmpty() && logPassword.isNotEmpty()
