@@ -18,14 +18,15 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var btnLogin: Button
     private lateinit var auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
 
         auth = Firebase.auth
         btnLogin = findViewById(R.id.entrarBtn)
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
 
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+
 
         btnLogin.setOnClickListener {
             val logEmail = editTextEmail.text.toString()

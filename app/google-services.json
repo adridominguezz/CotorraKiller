@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "974657196598",
-    "project_id": "cotorrakiller",
-    "storage_bucket": "cotorrakiller.appspot.com"
+    "project_number": "821709690191",
+    "project_id": "cotorrakiller-1ceeb",
+    "storage_bucket": "cotorrakiller-1ceeb.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:974657196598:android:e3717d7c157aa08503fe97",
+        "mobilesdk_app_id": "1:821709690191:android:a65548adee38fe66f6613a",
         "android_client_info": {
           "package_name": "com.example.cotorraskiller"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAuPclCOaNr4Rkmg33Zow1mteWWPazoAMY"
+          "current_key": "AIzaSyA5MufXSimbognfxsjQZUoBPCcJR-tSBD8"
         }
       ],
       "services": {
