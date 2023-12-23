@@ -1,6 +1,8 @@
 package com.example.cotorraskiller
 
+import android.content.ContentValues
 import android.content.Intent
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Email
@@ -32,7 +34,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var editTextConfirmPassword: EditText
     private lateinit var btnRegistro: Button
     private lateinit var auth: FirebaseAuth
-    private var connectSql = ConnectSql()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,59 +45,42 @@ class RegisterActivity : AppCompatActivity() {
         editTextEmail = findViewById(R.id.editTextEmail)
         editTextPassword = findViewById(R.id.editTextPassword)
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword)
+        editTextName = findViewById(R.id.editTextName)
 
         //Escucha el boton de registro
         btnRegistro.setOnClickListener {
-            //Convierte en Strings los textos dentro de los campos editText
-            val name = editTextName.text.toString()
-            val logEmail = editTextEmail.text.toString()
-            val logPassword = editTextPassword.text.toString()
-            val logConfirmPassword = editTextConfirmPassword.text.toString()
 
-            registerUser(logEmail, logPassword, name)
+            //Convierte en Strings los textos dentro de los campos editText
+            val name: String = editTextName.text.toString()
+            val logEmail: String = editTextEmail.text.toString()
+            val logPassword: String = editTextPassword.text.toString()
+            val logConfirmPassword: String = editTextConfirmPassword.text.toString()
 
             //Comprueba que los campos de email y contraseña no están vacios y que los campos de contraseña y confirmar contraseña sean iguales
             if ((checkEmpty(logEmail, logPassword)) && (logPassword == logConfirmPassword)){
                 //Comprueba que el texto que hay dentro del email lleva formato correcto de email, sino marca un error
                 if(!Patterns.EMAIL_ADDRESS.matcher(logEmail).matches()){
-                        editTextEmail.setError("Correo válido")
-                        editTextEmail.setFocusable(true)
+                    editTextEmail.setError("Correo válido")
+                    editTextEmail.setFocusable(true)
 
-                    } else if (logPassword.length<6){ //Este comprueba que la contraseña tenga al menos 6 caracteres
-                        editTextPassword.setError("Contraseña debe tener al menos 6 carácteres")
-                        editTextPassword.setFocusable(true)
+                } else if (logPassword.length<6){ //Este comprueba que la contraseña tenga al menos 6 caracteres
+                    editTextPassword.setError("Contraseña debe tener al menos 6 carácteres")
+                    editTextPassword.setFocusable(true)
 
                 } else{ //Si pasa las anteriores comprobaciones, pasa a registrar el jugador
-
-                    registerUser(logEmail, logPassword, name)
-
-                    //RegistrarJugador(logEmail, logPassword);
-
-
+                    RegistrarJugadorFirebase(logEmail, logPassword, name)
                 }
+
             }
         }
     }
 
-    private fun registerUser(logEmail: String, logPassword: String, name: String) {
-        try {
-            val addUser: PreparedStatement = connectSql.dbConn()?.prepareStatement("INSERT INTO Players (email, password, name) VALUES ('?', '?', '?')")!!
-                addUser.setString(1,logEmail)
-                addUser.setString(2, logPassword)
-                addUser.setString(3, name)
-                addUser.executeUpdate()
-            Toast.makeText(this, "Usuario creado correctamente", Toast.LENGTH_SHORT).show()
-        }catch (ex: SQLException){
-            Toast.makeText(this, "Error al crear usuario", Toast.LENGTH_SHORT).show()
-        }
-    }
 
-
-    private fun RegistrarJugador(logEmail: String, logPassword: String) {
+    private fun RegistrarJugadorFirebase(logEmail: String, logPassword: String, name: String) {
         auth.createUserWithEmailAndPassword(logEmail, logPassword)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful){
-                    Toast.makeText(this, "hecho!", Toast.LENGTH_SHORT).show()
+                    //Toast.makeText(this, "USUARIO CREADO", Toast.LENGTH_SHORT).show()
 
                     val user = auth.currentUser
 
@@ -109,15 +93,7 @@ class RegisterActivity : AppCompatActivity() {
                     println(uidString)
                     val correoString = logEmail
                     val passString = logEmail
-                    val nameString = editTextName.text.toString()
-
-//                    val datosJugador = hashMapOf<Any, Any>()
-//                    //datosJugador["Uid"] = uidString
-//                    datosJugador["Email"] = correoString
-//                    datosJugador["Password"] =passString
-//                    datosJugador["Name"] = nameString
-//                    datosJugador["Cotorras"] = contador
-
+                    val nameString = name
                     val database = FirebaseFirestore.getInstance()
 
                     database.collection("players").document(uidString).set(
@@ -131,8 +107,8 @@ class RegisterActivity : AppCompatActivity() {
                     )
 
                     Toast.makeText(this, "USUARIO REGISTRADO", Toast.LENGTH_SHORT).show()
-//                    startActivity((Intent(this,LoginActivity::class.java)))
-//                    finish()
+                    startActivity((Intent(this,LoginActivity::class.java)))
+                    finish()
                 } else {
                     Log.e("Error", "Error al crear usuario: ${task.exception}")
                     Toast.makeText(this, "ERROR AL REGISTRAR USUARIO", Toast.LENGTH_SHORT).show()
@@ -153,4 +129,5 @@ class RegisterActivity : AppCompatActivity() {
     fun volver(view: View) {
         startActivity(Intent(this, MainActivity::class.java))
     }
+
 }
