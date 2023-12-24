@@ -114,8 +114,9 @@
 
     <Button
         android:id="@+id/registerBtn"
-        android:backgroundTint="@color/verdeOscuro"
-        android:layout_width="wrap_content"
+        android:background="@drawable/estilo_btn"
+        android:textColor="@color/white"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:text="@string/registrar"
         app:layout_constraintBottom_toBottomOf="parent"

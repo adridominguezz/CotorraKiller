@@ -90,18 +90,14 @@ class RegisterActivity : AppCompatActivity() {
 
                     val uid = user?.uid
                     val uidString = user.toString()
-                    println(uidString)
-                    val correoString = logEmail
-                    val passString = logEmail
-                    val nameString = name
                     val database = FirebaseFirestore.getInstance()
 
                     database.collection("players").document(uidString).set(
                         hashMapOf(
                             "uid" to uidString,
-                            "email" to correoString,
-                            "password" to passString,
-                            "name" to nameString,
+                            "email" to logEmail,
+                            "password" to logPassword,
+                            "name" to name,
                             "cotorras" to contador
                             )
                     )

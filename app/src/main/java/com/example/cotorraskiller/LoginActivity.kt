@@ -3,6 +3,7 @@ package com.example.cotorraskiller
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -33,15 +34,25 @@ class LoginActivity : AppCompatActivity() {
             val logPassword = editTextPassword.text.toString()
 
             if (checkEmpty(logEmail, logPassword)){
-                auth.signInWithEmailAndPassword(logEmail,logPassword)
-                    .addOnCompleteListener(this){task ->
-                        if (task.isSuccessful){
-                            startActivity((Intent(this,JuegoActivity::class.java)))
-                            finish()
-                        }else{
-                            Toast.makeText(applicationContext, "ERROR INICIAR SESION", Toast.LENGTH_SHORT).show()
-                        }
+                if(!Patterns.EMAIL_ADDRESS.matcher(logEmail).matches()){
+                    editTextEmail.setError("Correo válido")
+                    editTextEmail.setFocusable(true)
+
+                } else if (logPassword.length<6){ //Este comprueba que la contraseña tenga al menos 6 caracteres
+                    editTextPassword.setError("Contraseña debe tener al menos 6 carácteres")
+                    editTextPassword.setFocusable(true)
+
+                } else{ //Si pasa las anteriores comprobaciones, pasa a registrar el jugador
+                    auth.signInWithEmailAndPassword(logEmail,logPassword)
+                        .addOnCompleteListener(this){task ->
+                            if (task.isSuccessful){
+                                startActivity((Intent(this,JuegoActivity::class.java)))
+                                finish()
+                            }else{
+                                Toast.makeText(applicationContext, "ERROR INICIAR SESION", Toast.LENGTH_SHORT).show()
+                            }
                     }
+                }
             }
         }
     }

@@ -8,4 +8,15 @@
     <string name="confirm_password">CONFIRMAR CONTRASEÑA</string>
     <string name="iniciar_sesion">INICIAR SESIÓN</string>
     <string name="registrar">REGISTRAR</string>
+
+
+<!-- MENU   -->
+    <string name="puntuacionMenu">Mi puntuación</string>
+    <string name="cotorrasMenu"> -- </string>
+    <string name="emailMenu"> -- </string>
+    <string name="nombreMenu"> -- </string>
+    <string name="menuTxt">MENÚ</string>
+    <string name="cerrar_sesion">CERRAR SESIÓN</string>
+    <string name="jugarBtn">JUGAR</string>
+    <string name="rankingBtn">RANKING</string>
 </resources>

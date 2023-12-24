@@ -75,8 +75,11 @@
 
     <Button
         android:id="@+id/entrarBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
+        android:background="@drawable/estilo_btn"
+
         android:text="@string/iniciar_sesion"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

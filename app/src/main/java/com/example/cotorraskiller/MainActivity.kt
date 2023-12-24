@@ -18,8 +18,4 @@ class MainActivity : AppCompatActivity() {
     fun registro(view: View) {
         startActivity(Intent(this, RegisterActivity::class.java))
     }
-
-    fun loginAction(view: View) {
-        startActivity(Intent(this, LoginActivity::class.java))
-    }
 }
