@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                     auth.signInWithEmailAndPassword(logEmail,logPassword)
                         .addOnCompleteListener(this){task ->
                             if (task.isSuccessful){
-                                startActivity((Intent(this,JuegoActivity::class.java)))
+                                startActivity((Intent(this,MenuActivity::class.java)))
                                 finish()
                             }else{
                                 Toast.makeText(applicationContext, "ERROR INICIAR SESION", Toast.LENGTH_SHORT).show()
@@ -60,6 +60,6 @@ class LoginActivity : AppCompatActivity() {
         return logEmail.isNotEmpty() && logPassword.isNotEmpty()
     }
     fun volver(view: View) {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, MenuActivity::class.java))
     }
 }

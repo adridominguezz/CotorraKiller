@@ -89,7 +89,7 @@ class RegisterActivity : AppCompatActivity() {
                     assert(user != null)
 
                     val uid = user?.uid
-                    val uidString = user.toString()
+                    val uidString = uid.toString()
                     val database = FirebaseFirestore.getInstance()
 
                     database.collection("players").document(uidString).set(
