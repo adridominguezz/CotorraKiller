@@ -7,10 +7,13 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.view.Display
+import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.lang.Integer.max
 import java.lang.Math.min
 import java.util.Random
@@ -133,7 +136,39 @@ class JuegoActivity : AppCompatActivity() {
     }
 
     private fun MensajeGameOver() {
-        TODO("Not yet implemented")
+
+        var cotorrasMuertas: TextView
+        var cotorrasM = COTORRA.toString()
+
+        val dialogView = layoutInflater.inflate(R.layout.gameover, null)
+        val dialogMessage = dialogView.findViewById<TextView>(R.id.hasMatado)
+        dialogMessage.text = "Has matado $cotorrasM cotorras"
+
+
+
+
+        MaterialAlertDialogBuilder(this)
+            .setTitle(resources.getString(R.string.tiempoTerminado))
+            .setMessage(resources.getString(R.string.hasMatado) + " " + cotorrasM + " cotorras")
+            .setNeutralButton(resources.getString(R.string.juegarDeNuevo)) { dialog, which ->
+                // Respond to neutral button press
+            }
+            .setNegativeButton(resources.getString(R.string.irMenu)) { dialog, which ->
+                // Respond to negative button press
+            }
+            .setPositiveButton(resources.getString(R.string.irRanking)) { dialog, which ->
+                // Respond to positive button press
+            }
+            .show()
+
+
+//        miDialog.setContentView(R.layout.gameover)
+//        cotorrasMuertas = miDialog.findViewById(R.id.cotorrasMuertas)
+//        cotorrasMuertas.text = COTORRA.toString()
+//
+//        miDialog.show()
+
+
     }
 
 

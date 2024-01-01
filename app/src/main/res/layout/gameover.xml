@@ -1,62 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
     android:layout_gravity="center"
-    android:background="@color/celeste">
-    
+    >
+
     <TextView
         android:id="@+id/tiempoTerminado"
         android:text="@string/tiempoTerminado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
     <TextView
-    android:id="@+id/hasMatado"
-    android:text="@string/hasMatado"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-        android:textColor="@color/black"/>
+        android:id="@+id/hasMatado"
+        android:text="@string/hasMatado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
     <TextView
         android:id="@+id/cotorrasMuertas"
         android:text="@string/cotorrasMuertas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/black"/>
-    <com.airbnb.lottie.LottieAnimationView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:textColor="@color/black"
+        android:textSize="30dp"
+        android:textStyle="bold"/>
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_margin="2dp"
         android:layout_marginStart="15dp"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="finjuego.json"
-        app:lottie_imageAssetsFolder="assets"
-        app:lottie_loop="true" />
+        android:src="@drawable/cotorra_dead" />
     <Button
         android:id="@+id/juegarDeNuevoBtn"
         android:text="@string/juegarDeNuevo"
         android:background="@drawable/estilo_btn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:textColor="@color/white"/>
+        android:textSize="25dp"/>
     <Button
         android:id="@+id/irMenuBtn"
         android:text="@string/irMenu"
         android:background="@drawable/estilo_btn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:textColor="@color/white"/>
+        android:textSize="25dp"/>
     <Button
         android:id="@+id/irRankingBtn"
         android:text="@string/irRanking"
         android:background="@drawable/estilo_btn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
         android:layout_margin="5dp"
-        android:textColor="@color/white"/>
+        android:textSize="25dp"/>
 </androidx.appcompat.widget.LinearLayoutCompat>

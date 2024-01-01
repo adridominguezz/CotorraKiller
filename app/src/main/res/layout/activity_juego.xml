@@ -7,90 +7,113 @@
     android:layout_height="match_parent"
     tools:context=".JuegoActivity">
 
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
         <!--        INFORMACION/MARCADOR-->
-        <androidx.appcompat.widget.LinearLayoutCompat
+       <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:background="@drawable/estilo_btn"
-            android:gravity="center"
-            android:orientation="horizontal">
+           android:background="@color/seed"
+           >
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="wrap_content"
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/topAppBar"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/AnchoTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="@string/AnchoTV"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:id="@+id/AltoTV"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:text="@string/AltoTV"
-                    android:textColor="@color/black" />
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:padding="3dp"
-                android:src="@drawable/tira" />
-
-            <TextView
-                android:id="@+id/contadorKills"
-                android:layout_width="50dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
+                android:minHeight="?attr/actionBarSize"
                 android:gravity="center"
-                android:text="@string/contadorKills"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+               >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:layout_gravity="center">
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:id="@+id/AnchoTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/md_theme_light_onTertiary"
+                            android:text="@string/AnchoTV"/>
 
-            <TextView
-                android:id="@+id/nombreTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:text="@string/jugadorTextView"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/AltoTV"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="10dp"
+                            android:textColor="@color/md_theme_light_onTertiary"
+                            android:text="@string/AltoTV" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_margin="2dp"
-                android:layout_marginStart="15dp"
-                app:lottie_autoPlay="true"
-                app:lottie_fileName="tiempo.json"
-                app:lottie_imageAssetsFolder="assets"
-                app:lottie_loop="true" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:padding="3dp"
+                        android:src="@drawable/tira" />
 
-            <TextView
-                android:id="@+id/TiempoTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="2dp"
-                android:text="@string/tiempoTextView"
-                android:textColor="@color/black"
-                android:textSize="30dp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/contadorKills"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:gravity="center"
+                        android:text="@string/contadorKills"
+                        android:textColor="@color/md_theme_light_onTertiary"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
 
-        </androidx.appcompat.widget.LinearLayoutCompat>
+                    <TextView
+                        android:id="@+id/nombreTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:text="@string/jugadorTextView"
+                        android:textColor="@color/md_theme_light_onTertiary"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_margin="5dp"
+                        android:layout_marginStart="15dp"
+                        app:lottie_autoPlay="true"
+                        app:lottie_fileName="tiempo.json"
+                        app:lottie_imageAssetsFolder="assets"
+                        app:lottie_loop="true" />
+
+                    <TextView
+                        android:id="@+id/TiempoTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="5dp"
+                        android:text="@string/tiempoTextView"
+                        android:textColor="@color/md_theme_light_onTertiary"
+                        android:textSize="30dp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
 
         <!--        COTORRAS-->
         <FrameLayout
