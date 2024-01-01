@@ -19,4 +19,23 @@
     <string name="cerrar_sesion">CERRAR SESIÓN</string>
     <string name="jugarBtn">JUGAR</string>
     <string name="rankingBtn">RANKING</string>
+
+
+<!--  ESCENARIO  -->
+    <string name="contadorKills">0</string>
+    <string name="jugadorTextView"> ---- </string>
+    <string name="tiempoTextView">0S</string>
+
+<!--    PANTALLA-->
+    <string name="AnchoTV"> -- </string>
+    <string name="AltoTV"> -- </string>
+
+<!--    GAME OVER-->
+<string name="tiempoTerminado">¡Tiempo terminado!</string>
+    <string name="hasMatado">Has matado </string>
+    <string name="cotorrasMuertas"> -- </string>
+    <string name="juegarDeNuevo">JUGAR DE NUEVO</string>
+    <string name="irMenu">MENÚ</string>
+    <string name="irRanking">RANKING</string>
+
 </resources>

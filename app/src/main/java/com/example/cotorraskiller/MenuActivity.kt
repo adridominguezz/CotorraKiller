@@ -56,8 +56,20 @@ class MenuActivity : AppCompatActivity() {
         txtEmail = findViewById(R.id.userEmailTxt)
         txtName = findViewById(R.id.userNameTxt)
 
+        //BOTON CERRAR SESION
         btnCerrarSesion.setOnClickListener { cerrarSesion() }
-        btnJugar.setOnClickListener { Toast.makeText(this, "JUGAR", Toast.LENGTH_SHORT).show()}
+        //BOTON JUGAR
+        btnJugar.setOnClickListener {
+
+
+            var uidString: String = user?.uid.toString()
+            var nameString: String = txtName.text.toString()
+            var cotorras = txtCotorras.text.toString()
+
+            startActivity(Intent(this, JuegoActivity::class.java).putExtra("UID", uidString).putExtra( "NAME", nameString).putExtra("COTORRAS", cotorras))
+
+        }
+        //BOTON RANKING
         btnRanking.setOnClickListener { Toast.makeText(this, "RANKING", Toast.LENGTH_SHORT).show() }
 
     }
