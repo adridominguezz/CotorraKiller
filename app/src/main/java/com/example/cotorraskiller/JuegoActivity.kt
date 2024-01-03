@@ -1,21 +1,31 @@
 package com.example.cotorraskiller
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Point
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.view.Display
+import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import java.lang.Integer.max
 import java.lang.Math.min
+import java.util.HashMap
 import java.util.Random
 
 class JuegoActivity : AppCompatActivity() {
@@ -40,6 +50,11 @@ class JuegoActivity : AppCompatActivity() {
     var GameOver = false
     lateinit var miDialog: Dialog
 
+    lateinit var firebaseAuth: FirebaseAuth
+    //lateinit var user: FirebaseUser
+    lateinit var firebaseDatabase: FirebaseDatabase
+    lateinit var players: DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_juego)
@@ -53,11 +68,17 @@ class JuegoActivity : AppCompatActivity() {
 
         miDialog = Dialog(this)
 
+        firebaseAuth = FirebaseAuth.getInstance()
+       // user = firebaseAuth.currentUser!!
+        firebaseDatabase = FirebaseDatabase.getInstance()
+        players = firebaseDatabase.getReference("players")
+
         val intent: Bundle? = intent.extras
         UID = intent?.getString("UID").toString()
         NOMBRE = intent?.getString("NAME").toString()
-        var contador = intent?.getString("COTORRAS").toString()
-        COTORRA = contador.toLong()
+//        var contador = intent?.getString("COTORRAS").toString()
+//        COTORRA = contador.toLong()
+        COTORRA = 0
 
         contadorKills.text = COTORRA.toString()
         nombreJugador.text = NOMBRE
@@ -113,7 +134,7 @@ class JuegoActivity : AppCompatActivity() {
     }
 
     private fun CuentaAtras(){
-        object : CountDownTimer(30000, 1000) {
+        object : CountDownTimer(10000, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
                 var segundosRestantes : Long = millisUntilFinished/1000
@@ -131,6 +152,7 @@ class JuegoActivity : AppCompatActivity() {
                 tiempo.setText("0S")
                 GameOver = true
                 MensajeGameOver()
+                guardarResultados(COTORRA)
             }
         }.start()
     }
@@ -145,31 +167,72 @@ class JuegoActivity : AppCompatActivity() {
         dialogMessage.text = "Has matado $cotorrasM cotorras"
 
 
-
-
         MaterialAlertDialogBuilder(this)
             .setTitle(resources.getString(R.string.tiempoTerminado))
             .setMessage(resources.getString(R.string.hasMatado) + " " + cotorrasM + " cotorras")
             .setNeutralButton(resources.getString(R.string.juegarDeNuevo)) { dialog, which ->
-                // Respond to neutral button press
+                COTORRA = 0
+                dialog.dismiss()
+                contadorKills.text = "0"
+                GameOver = false
+                CuentaAtras()
+                Movimiento()
             }
             .setNegativeButton(resources.getString(R.string.irMenu)) { dialog, which ->
-                // Respond to negative button press
+                startActivity(Intent(this, MenuActivity::class.java))
             }
             .setPositiveButton(resources.getString(R.string.irRanking)) { dialog, which ->
-                // Respond to positive button press
+                startActivity(Intent(this, RankingActivity::class.java))
             }
             .show()
 
-
-//        miDialog.setContentView(R.layout.gameover)
-//        cotorrasMuertas = miDialog.findViewById(R.id.cotorrasMuertas)
-//        cotorrasMuertas.text = COTORRA.toString()
-//
-//        miDialog.show()
-
-
     }
 
+    private fun guardarResultados(cotorras: Long) {
 
-}
+        val user = firebaseAuth.currentUser
+        val uid = user?.uid
+        val contextView = findViewById<View>(R.id.layoutJuego)
+
+        if (uid != null) {
+            val uidString = uid.toString()
+            val database = FirebaseFirestore.getInstance()
+
+            val userRef = database.collection("players").document(uidString)
+
+            userRef.get()
+                .addOnSuccessListener { documentSnapshot ->
+                    if (documentSnapshot.exists()) {
+                        val cotorrasActual = documentSnapshot.getLong("cotorras") ?: 0
+                        if (cotorras > cotorrasActual.toInt()) {
+                            userRef.update("cotorras", cotorras)
+                                .addOnSuccessListener {
+                                    Snackbar.make(
+                                        contextView,
+                                        "Puntuaje actualizado",
+                                        Snackbar.LENGTH_SHORT
+                                    ).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    Snackbar.make(
+                                        contextView,
+                                        "Error al actualizar cotorras",
+                                        Snackbar.LENGTH_SHORT
+                                    ).show()
+                                }
+                        } else {
+                            Snackbar.make(
+                                contextView,
+                                "No has superado tu record. ¡Intentalo de nuevo!",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
+                        }
+                    } else {
+                        Snackbar.make(contextView, "Usuario no encontrado", Snackbar.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+        }
+    }
+    }
+

@@ -98,7 +98,8 @@ class RegisterActivity : AppCompatActivity() {
                             "email" to logEmail,
                             "password" to logPassword,
                             "name" to name,
-                            "cotorras" to contador
+                            "cotorras" to contador,
+                            "imagen" to ""
                             )
                     )
 

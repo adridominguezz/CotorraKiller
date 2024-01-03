@@ -11,11 +11,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FORMULARIO REGISTRO"
+        android:textStyle="bold"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.137" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:src="@drawable/cazador"
+        app:civ_border_color="@color/black"
+        android:layout_marginBottom="5dp"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewName"
@@ -26,7 +41,7 @@
         app:layout_constraintBottom_toTopOf="@+id/editTextName"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <EditText
+        <EditText
         android:id="@+id/editTextName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -91,7 +106,7 @@
         android:id="@+id/editTextConfirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="244dp"
+        android:layout_marginBottom="180dp"
         android:ems="10"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"

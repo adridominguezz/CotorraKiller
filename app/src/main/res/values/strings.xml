@@ -5,12 +5,13 @@
     <string name="name">NOMBRE</string>
     <string name="email">EMAIL</string>
     <string name="password">CONTRASEÑA</string>
+    <string name="imagenPerfil">FOTO DE PERFIL</string>
     <string name="confirm_password">CONFIRMAR CONTRASEÑA</string>
     <string name="iniciar_sesion">INICIAR SESIÓN</string>
     <string name="registrar">REGISTRAR</string>
 
 
-<!-- MENU   -->
+    <!-- MENU   -->
     <string name="puntuacionMenu">Mi puntuación</string>
     <string name="cotorrasMenu"> -- </string>
     <string name="emailMenu"> -- </string>
@@ -21,17 +22,17 @@
     <string name="rankingBtn">RANKING</string>
 
 
-<!--  ESCENARIO  -->
+    <!--  ESCENARIO  -->
     <string name="contadorKills">0</string>
     <string name="jugadorTextView"> ---- </string>
     <string name="tiempoTextView">0S</string>
 
-<!--    PANTALLA-->
+    <!--    PANTALLA-->
     <string name="AnchoTV"> -- </string>
     <string name="AltoTV"> -- </string>
 
-<!--    GAME OVER-->
-<string name="tiempoTerminado">¡Tiempo terminado!</string>
+    <!--    GAME OVER-->
+    <string name="tiempoTerminado">¡Tiempo terminado!</string>
     <string name="hasMatado">Has matado </string>
     <string name="cotorrasMuertas"> -- </string>
     <string name="juegarDeNuevo">JUGAR DE NUEVO</string>

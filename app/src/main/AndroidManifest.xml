@@ -15,6 +15,9 @@
         android:theme="@style/Theme.CotorrasKiller"
         tools:targetApi="31">
         <activity
+            android:name=".RankingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MenuActivity"
             android:exported="false" />
         <activity
