@@ -18,6 +18,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import de.hdodenhof.circleimageview.CircleImageView
 
 class MenuActivity : AppCompatActivity() {
 
@@ -33,6 +34,7 @@ class MenuActivity : AppCompatActivity() {
     lateinit var txtCotorras: TextView
     lateinit var txtName: TextView
     lateinit var txtEmail: TextView
+    lateinit var imagenCircleView: CircleImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +57,7 @@ class MenuActivity : AppCompatActivity() {
         txtCotorras = findViewById(R.id.cotorrasTxt)
         txtEmail = findViewById(R.id.userEmailTxt)
         txtName = findViewById(R.id.userNameTxt)
+        imagenCircleView = findViewById(R.id.imgUserMenu)
 
         //BOTON CERRAR SESION
         btnCerrarSesion.setOnClickListener { cerrarSesion() }

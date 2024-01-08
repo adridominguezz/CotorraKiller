@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import de.hdodenhof.circleimageview.CircleImageView
 import org.checkerframework.checker.nullness.qual.NonNull
 import java.sql.Connection
 import java.sql.PreparedStatement
@@ -34,6 +35,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var editTextConfirmPassword: EditText
     private lateinit var btnRegistro: Button
     private lateinit var auth: FirebaseAuth
+    private lateinit var imagenCircleView: CircleImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
