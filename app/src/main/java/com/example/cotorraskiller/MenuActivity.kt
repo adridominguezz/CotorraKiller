@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.cotorraskiller.R.id.editImgBtn
+import com.example.cotorraskiller.R.id.imgUserMenu
 import com.google.android.gms.tasks.Task
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -278,6 +279,7 @@ class MenuActivity : AppCompatActivity() {
                 val downloadUri: Uri? = uri
                 val resultado = HashMap<String, Any>()
                 resultado[perfil] = downloadUri.toString()
+
                 players.child(user!!.uid).updateChildren(resultado)
                     .addOnSuccessListener {
                         Toast.makeText(this@MenuActivity, "IMAGEN CAMBIADA", Toast.LENGTH_SHORT).show()
