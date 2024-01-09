@@ -20,6 +20,7 @@
     <string name="cerrar_sesion">CERRAR SESIÓN</string>
     <string name="jugarBtn">JUGAR</string>
     <string name="rankingBtn">RANKING</string>
+    <string name="seleccionImg">Seleccionar imagen de:</string>
 
 
     <!--  ESCENARIO  -->
@@ -38,5 +39,6 @@
     <string name="juegarDeNuevo">JUGAR DE NUEVO</string>
     <string name="irMenu">MENÚ</string>
     <string name="irRanking">RANKING</string>
+    <string name="Galeria">Galeria</string>
 
 </resources>

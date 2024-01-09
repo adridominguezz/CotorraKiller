@@ -18,6 +18,7 @@
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:text="@string/puntuacionMenu"
+        android:textStyle="bold"
         android:textSize="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -25,64 +26,101 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--COTORRAS MATADAS-->
-    <TextView
-        android:id="@+id/cotorrasTxt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="@string/cotorrasMenu"
-        android:textSize="35dp"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/puntuacionTxt" />
-        <!--IMAGEN-->
-    <!--NOMBRE-->
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgMenu"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:src="@drawable/cotorra_dead"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cotorrasTxt" />
     <LinearLayout
-        android:id="@+id/userImgName"
+        android:id="@+id/estadisticaCotorras"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/puntuacionTxt"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@+id/imgMenu"
-        >
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imgUserMenu"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/cazador"
-            app:civ_border_color="@color/black"
-            android:layout_margin="5dp"
-            app:civ_border_width="2dp"
-            app:layout_constraintBottom_toTopOf="@+id/textViewName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+        android:gravity="center">
+
         <TextView
-            android:id="@+id/userNameTxt"
+            android:id="@+id/cotorrasTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:text="@string/nombreMenu"
-            android:textSize="35dp"
+            android:text="@string/cotorrasMenu"
+            android:textSize="40dp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/puntuacionTxt" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgMenu"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/cotorra_dead"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cotorrasTxt" />
+
     </LinearLayout>
 
 
-        <!--EMAIL-->
+    <!--FOTO DE PERFIL-->
+    <RelativeLayout
 
+        android:id="@+id/relativeLayout"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/estadisticaCotorras">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgUserMenu"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/cazador"
+            app:civ_border_color="@color/black"
+            app:civ_border_width="1dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/editImgBtn"
+            style="?attr/floatingActionButtonSmallStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            app:srcCompat="@drawable/baseline_create_24" />
+
+
+    </RelativeLayout>
+
+
+    <!--NOMBRE-->
+    <TextView
+        android:id="@+id/userNameTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:text="@string/nombreMenu"
+        android:textSize="45dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
+
+
+
+    <!--EMAIL-->
     <TextView
         android:id="@+id/userEmailTxt"
         android:layout_width="wrap_content"
@@ -93,7 +131,7 @@
         android:textSize="35dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userImgName" />
+        app:layout_constraintTop_toBottomOf="@+id/userNameTxt" />
 
     <Button
         android:id="@+id/JugarBtn"

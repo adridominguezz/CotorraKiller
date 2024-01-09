@@ -2,7 +2,10 @@ package com.example.cotorraskiller
 
 import android.content.ContentValues
 import android.content.Intent
+import android.Manifest
+import android.content.pm.PackageManager
 import android.database.sqlite.SQLiteDatabase
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract.CommonDataKinds.Email
@@ -12,6 +15,9 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -20,6 +26,8 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import de.hdodenhof.circleimageview.CircleImageView
 import org.checkerframework.checker.nullness.qual.NonNull
 import java.sql.Connection
@@ -37,6 +45,7 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var imagenCircleView: CircleImageView
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
@@ -48,6 +57,8 @@ class RegisterActivity : AppCompatActivity() {
         editTextPassword = findViewById(R.id.editTextPassword)
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword)
         editTextName = findViewById(R.id.editTextName)
+
+
 
         //Escucha el boton de registro
         btnRegistro.setOnClickListener {
@@ -75,7 +86,11 @@ class RegisterActivity : AppCompatActivity() {
 
             }
         }
+
+
     }
+
+
 
 
     private fun RegistrarJugadorFirebase(logEmail: String, logPassword: String, name: String) {
