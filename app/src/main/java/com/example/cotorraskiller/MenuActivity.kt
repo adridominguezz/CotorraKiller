@@ -224,24 +224,34 @@ class MenuActivity : AppCompatActivity() {
     }
 
     private fun ComprombarPermisoAlmacenamiento(): Boolean {
-        val resultado: Boolean = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        val resultado: Boolean = ContextCompat.checkSelfPermission(
+            this, Manifest.permission.WRITE_EXTERNAL_STORAGE
+        ) == PackageManager.PERMISSION_GRANTED
         return resultado
     }
 
     //SE LLAMA CUANDO EL USUARIO O JUGADOR PRESIONA PERMITIR O DENEGAR EL CUADRO DEL DIALOGO
-    override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray) {
-        when (requestCode){
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
             CODIGO_DE_SOLICITUD_DE_ALMACENAMIENTO -> {
-                if (grantResults.size > 0){
-                    var EscrituraDeAlmacenamiento: Boolean = grantResults[0] == PackageManager.PERMISSION_GRANTED
-                    if (EscrituraDeAlmacenamiento){
-                        //Permiso GUE Habilitado
-                        ElegirImagenGaleria()
-                    }else{
-                        Toast.makeText(this, "HABILITE EL PERMISO A LA GALERIA", Toast.LENGTH_SHORT).show()
-                    }
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permiso concedido, ahora puedes hacer lo que sea que requiera este permiso
+                    ElegirImagenGaleria()
+                } else {
+                    // Permiso denegado, puedes informar al usuario o manejar la denegación
+                    Toast.makeText(
+                        this,
+                        "El permiso para acceder a la galería fue denegado",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
+                return
             }
+            // Otros casos de solicitud de permisos si los tienes
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }

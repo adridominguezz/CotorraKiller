@@ -63,8 +63,8 @@ class JuegoActivity : AppCompatActivity() {
         contadorKills = findViewById(R.id.contadorKills)
         nombreJugador = findViewById(R.id.nombreTextView)
         tiempo = findViewById(R.id.TiempoTextView)
-        AltoTV = findViewById(R.id.AltoTV)
-        AnchoTV = findViewById(R.id.AnchoTV)
+//        AltoTV = findViewById(R.id.AltoTV)
+//        AnchoTV = findViewById(R.id.AnchoTV)
 
         miDialog = Dialog(this)
 
@@ -113,8 +113,8 @@ class JuegoActivity : AppCompatActivity() {
         var ancho = AnchoPantalla.toString()
         var alto = AltoPantalla.toString()
 
-        AnchoTV.text = ancho
-        AltoTV.text = alto
+//        AnchoTV.text = ancho
+//        AltoTV.text = alto
 
         random = Random()
     }

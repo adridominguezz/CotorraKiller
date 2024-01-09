@@ -15,7 +15,7 @@
         android:id="@+id/puntuacionTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:gravity="center"
         android:text="@string/puntuacionMenu"
         android:textStyle="bold"
@@ -113,7 +113,7 @@
         android:layout_margin="5dp"
         android:gravity="center"
         android:text="@string/nombreMenu"
-        android:textSize="45dp"
+        android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
@@ -128,7 +128,7 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:text="@string/emailMenu"
-        android:textSize="35dp"
+        android:textSize="25dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userNameTxt" />
@@ -136,7 +136,7 @@
     <Button
         android:id="@+id/JugarBtn"
         android:background="@drawable/estilo_btn"
-        android:layout_width="315dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:text="@string/jugarBtn"
@@ -148,7 +148,7 @@
 
     <Button
         android:id="@+id/rankingBtn"
-        android:layout_width="315dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="@drawable/estilo_btn"
@@ -161,13 +161,13 @@
 
     <Button
         android:id="@+id/CerrarSesionBtn"
-        android:layout_width="315dp"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:layout_marginBottom="30dp"
         android:background="@drawable/estilo_btn"
         android:text="@string/cerrar_sesion"
-        android:textSize="35dp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
