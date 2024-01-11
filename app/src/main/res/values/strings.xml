@@ -23,16 +23,16 @@
     <string name="seleccionImg">Seleccionar imagen de:</string>
 
 
-    <!--  ESCENARIO  -->
+    <!--ESCENARIO  -->
     <string name="contadorKills">0</string>
     <string name="jugadorTextView"> ---- </string>
     <string name="tiempoTextView">0S</string>
 
-    <!--    PANTALLA-->
+    <!--PANTALLA-->
     <string name="AnchoTV"> -- </string>
     <string name="AltoTV"> -- </string>
 
-    <!--    GAME OVER-->
+    <!--GAME OVER-->
     <string name="tiempoTerminado">¡Tiempo terminado!</string>
     <string name="hasMatado">Has matado </string>
     <string name="cotorrasMuertas"> -- </string>
@@ -40,5 +40,11 @@
     <string name="irMenu">MENÚ</string>
     <string name="irRanking">RANKING</string>
     <string name="Galeria">Galeria</string>
+
+
+    <!--RANKING-->
+    <string name="puntuacionRanking">PUNTUACION</string>
+    <string name="emailUsuarioRanking">Email del usuario</string>
+    <string name="nombreUsuarioRanking">Nombre del usuario</string>
 
 </resources>

@@ -107,26 +107,26 @@ class MenuActivity : AppCompatActivity() {
         btnRanking.setOnClickListener { Toast.makeText(this, "RANKING", Toast.LENGTH_SHORT).show() }
 
         //Escucha el boton de editar imagen
-        editImgBtn.setOnClickListener {
-
-            MaterialAlertDialogBuilder(this)
-                .setTitle(resources.getString(R.string.seleccionImg))
-                //Boton de galeria
-                .setNeutralButton(resources.getString(R.string.Galeria)) { dialog, which ->
-                    if (!ComprombarPermisoAlmacenamiento()){ //Si no se habilitó el permiso se solicita
-                        SolicitarPermisoAlmacenamiento()
-                    }else{
-                        ElegirImagenGaleria() //Si se habilitó el permiso se elige
-                    }
-                }
-//                .setNegativeButton(resources.getString(R.string.irMenu)) { dialog, which ->
+//        editImgBtn.setOnClickListener {
 //
+//            MaterialAlertDialogBuilder(this)
+//                .setTitle(resources.getString(R.string.seleccionImg))
+//                //Boton de galeria
+//                .setNeutralButton(resources.getString(R.string.Galeria)) { dialog, which ->
+//                    if (!ComprombarPermisoAlmacenamiento()){ //Si no se habilitó el permiso se solicita
+//                        SolicitarPermisoAlmacenamiento()
+//                    }else{
+//                        ElegirImagenGaleria() //Si se habilitó el permiso se elige
+//                    }
 //                }
-//                .setPositiveButton(resources.getString(R.string.irRanking)) { dialog, which ->
-//
-//                }
-                .show()
-        }
+////                .setNegativeButton(resources.getString(R.string.irMenu)) { dialog, which ->
+////
+////                }
+////                .setPositiveButton(resources.getString(R.string.irRanking)) { dialog, which ->
+////
+////                }
+//                .show()
+//        }
 
     }
 
@@ -135,7 +135,8 @@ class MenuActivity : AppCompatActivity() {
         super.onStart()
     }
 
-    private fun userLog(){ //Metodo que comprueba si hay un usuario con la sesión iniciada
+    //Metodo que comprueba si hay un usuario con la sesión iniciada
+    private fun userLog(){
         if (user == null) {
             // Si el usuario no está autenticado, redirige a la actividad de inicio de sesión
             startActivity(Intent(this, MainActivity::class.java))
@@ -154,31 +155,7 @@ class MenuActivity : AppCompatActivity() {
         Toast.makeText(this, "Sesión cerrada", Toast.LENGTH_SHORT).show()
     }
 
-    private fun consulta(){
-        val userUid = user?.uid.toString()
-        val query: Query = players.orderByChild("uid").equalTo(userUid)
-        query.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataSnapshot.children.forEach { ds ->
-                    var cotorrasString = ""+ds.child("cotorras").value
-                    var nameString = ""+ds.child("name").value
-                    var emailString = ""+ds.child("email").value
-
-
-//                    txtCotorras.text = cotorrasString
-//                    txtEmail.text = emailString
-//                    txtName.text = nameString
-
-                }
-
-            }
-
-            override fun onCancelled(databaseError: DatabaseError) {
-                // Aquí va la lógica para manejar errores de lectura de datos
-            }
-        })
-
-    }
+    //METODO PARA OBTENER LOS DATOS DEL USUARIO
     private fun datosUser() {
 
         val uid = user?.uid
@@ -232,11 +209,7 @@ class MenuActivity : AppCompatActivity() {
     }
 
     //SE LLAMA CUANDO EL USUARIO O JUGADOR PRESIONA PERMITIR O DENEGAR EL CUADRO DEL DIALOGO
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int,permissions: Array<out String>,grantResults: IntArray) {
         when (requestCode) {
             CODIGO_DE_SOLICITUD_DE_ALMACENAMIENTO -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
