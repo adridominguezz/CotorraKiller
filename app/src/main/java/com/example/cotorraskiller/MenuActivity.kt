@@ -104,7 +104,9 @@ class MenuActivity : AppCompatActivity() {
 
         }
         //BOTON RANKING
-        btnRanking.setOnClickListener { Toast.makeText(this, "RANKING", Toast.LENGTH_SHORT).show() }
+        btnRanking.setOnClickListener {
+            startActivity(Intent(this, RankingActivity::class.java))
+        }
 
         //Escucha el boton de editar imagen
 //        editImgBtn.setOnClickListener {
