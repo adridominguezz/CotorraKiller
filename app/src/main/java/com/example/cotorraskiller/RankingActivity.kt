@@ -14,71 +14,64 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.firestore.FirebaseFirestore
 
 class RankingActivity : AppCompatActivity() {
-    lateinit var mLayoutManager: LinearLayoutManager
-    lateinit var rVJugadores: RecyclerView
-    lateinit var adapter: Adapter
-    lateinit var jugadorList: MutableList<Jugador>
-    lateinit var firebaseAuth: FirebaseAuth
+
+
+    //OBTENER LA LISTA DE JUGADORES
+    val playersCollection = FirebaseFirestore.getInstance().collection("players") // Definir la colección de Firebase
+    val playerList: ArrayList<Jugador> = ArrayList() // Crear la lista para almacenar los jugadores
+
+    //HACER EL RECYCLERVIEW
+    lateinit var recyclerView: RecyclerView
+    lateinit var playerAdapter: PlayerAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ranking)
 
-
-        mLayoutManager = LinearLayoutManager(this)
-        firebaseAuth = FirebaseAuth.getInstance()
-        rVJugadores = findViewById(R.id.recyclerViewJugadores)
-
-        mLayoutManager.reverseLayout = true //Ordena de la Z a la A
-        mLayoutManager.stackFromEnd =  true //Empieza desde arriba
-
-        rVJugadores.setHasFixedSize(true)
-        rVJugadores.layoutManager = mLayoutManager
-        jugadorList = mutableListOf()
-
-        ObtenerTodosLosUsuario()
-
+        listarJugadores()
     }
 
-    private fun ObtenerTodosLosUsuario() {
-        val fUser: FirebaseUser = FirebaseAuth.getInstance().currentUser!!
-        val ref: DatabaseReference = FirebaseDatabase.getInstance().getReference("players")
+    private fun listarJugadores(){
+        playersCollection.get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                // Obtener campos específicos del documento
+                val uid = document.getString("uid") ?: ""
+                val name = document.getString("name") ?: ""
+                val email = document.getString("email") ?: ""
+                val cotorras = document.getLong("cotorras") ?: 0
 
+                // Crear un objeto Jugador con los campos deseados
+                val jugador = Jugador(uid, name, email, cotorras)
 
-        ref.orderByChild("cotorras").addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-
-                jugadorList.clear()
-
-                for (ds in dataSnapshot.children) {
-                    var jugador = ds.getValue(Jugador::class.java)
-                    jugadorList.add(jugador!!)
-                }
-
-                // Mueve la creación del adaptador fuera del bucle
-                // Asegúrate de que la lista jugadorList se esté llenando correctamente antes de crear el adaptador
-                // Puedes agregar un Log para verificar si la lista contiene elementos
-                Toast.makeText(this@RankingActivity, "Cantidad de jugadores: ${jugadorList.size}", Toast.LENGTH_SHORT).show()
-
-
-                // Asegúrate de que el adaptador se inicializa con la lista correcta
-                adapter = Adapter(this@RankingActivity, jugadorList)
-                rVJugadores.adapter = adapter
+                // Agregar el jugador a la lista
+                playerList.add(jugador)
             }
+            // Ordenar la lista de jugadores por el número de cotorras de mayor a menor
+            playerList.sortByDescending { it.cotorras }
 
-            override fun onCancelled(databaseError: DatabaseError) {
-                Toast.makeText(this@RankingActivity, "Error al obtener datos: ${databaseError.message}", Toast.LENGTH_SHORT).show()
-            }
-        })
+            rellenarRecycler(playerList)
+            imprmir(playerList)
+
+        }.addOnFailureListener { exception ->
+            // Manejar errores si es necesario
+            println("Error getting players: $exception")
+        }
     }
 
-
-
-    override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return super.onSupportNavigateUp()
+    private fun rellenarRecycler(playerList: ArrayList<Jugador>) {
+        recyclerView = findViewById(R.id.recyclerViewJugadores)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        playerAdapter = PlayerAdapter(playerList)
+        recyclerView.adapter = playerAdapter
     }
+
+    private fun imprmir(playerList: ArrayList<Jugador>) {
+        var jugador1 = playerList[0].toString()
+        Toast.makeText(this, jugador1, Toast.LENGTH_SHORT).show()
+    }
+
 }
