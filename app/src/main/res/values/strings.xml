@@ -46,5 +46,8 @@
     <string name="puntuacionRanking">PUNTUACION</string>
     <string name="emailUsuarioRanking">Email del usuario</string>
     <string name="nombreUsuarioRanking">Nombre del usuario</string>
+    <string name="juegoPausado">JUEGO PAUSADO</string>
+    <string name="nuevaPartida">NUEVA PARTIDA</string>
+    <string name="reanudar">REANUDAR</string>
 
 </resources>

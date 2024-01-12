@@ -7,25 +7,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
-import android.view.Display
 import android.view.View
 import android.widget.Button
-import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
-import java.lang.Integer.max
-import java.lang.Math.min
-import java.util.HashMap
 import java.util.Random
 
 class JuegoActivity : AppCompatActivity() {
@@ -54,6 +45,12 @@ class JuegoActivity : AppCompatActivity() {
     //lateinit var user: FirebaseUser
     lateinit var firebaseDatabase: FirebaseDatabase
     lateinit var players: DatabaseReference
+
+    //Temporizador
+    private var countDownTimer: CountDownTimer? = null
+    private var tiempoRestante: Long = 20000 // ajusta el valor inicial según tu necesidad
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,9 +131,10 @@ class JuegoActivity : AppCompatActivity() {
     }
 
     private fun CuentaAtras(){
-        object : CountDownTimer(10000, 1000) {
+        countDownTimer = object : CountDownTimer(tiempoRestante, 1000) {
 
             override fun onTick(millisUntilFinished: Long) {
+                tiempoRestante = millisUntilFinished
                 var segundosRestantes : Long = millisUntilFinished/1000
                 when {
                     segundosRestantes > 5000 -> velocidadCotorra = 200
@@ -149,6 +147,7 @@ class JuegoActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
+                tiempoRestante = 0
                 tiempo.setText("0S")
                 GameOver = true
                 MensajeGameOver()
@@ -157,14 +156,19 @@ class JuegoActivity : AppCompatActivity() {
         }.start()
     }
 
+    private fun pausarTemporizador() {
+        countDownTimer?.cancel()
+    }
+
+    private fun reanudarTemporizador(tiempoRestante: Long) {
+        countDownTimer?.cancel()
+        CuentaAtras()
+    }
+
     private fun MensajeGameOver() {
 
         var cotorrasMuertas: TextView
         var cotorrasM = COTORRA.toString()
-
-        val dialogView = layoutInflater.inflate(R.layout.gameover, null)
-        val dialogMessage = dialogView.findViewById<TextView>(R.id.hasMatado)
-        dialogMessage.text = "Has matado $cotorrasM cotorras"
 
 
         MaterialAlertDialogBuilder(this)
@@ -234,5 +238,43 @@ class JuegoActivity : AppCompatActivity() {
                 }
         }
     }
+
+    fun menu(view: View) {
+
+        pausarTemporizador()
+
+        val dialogView = layoutInflater.inflate(R.layout.menu_juego, null)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(dialogView)
+            .show()
+
+        val reanudar = dialogView.findViewById<Button>(R.id.reanudarBtn)
+        val jugarNuevo = dialogView.findViewById<Button>(R.id.juegarDeNuevoBtn)
+        val menu = dialogView.findViewById<Button>(R.id.irMenuBtn)
+        val ranking = dialogView.findViewById<Button>(R.id.irRankingBtn)
+
+        reanudar.setOnClickListener {
+            dialog.dismiss()
+            reanudarTemporizador(tiempoRestante)
+        }
+
+        jugarNuevo.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, JuegoActivity::class.java))
+        }
+
+        menu.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, MenuActivity::class.java))
+
+        }
+
+        ranking.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, RankingActivity::class.java))
+        }
     }
+
+
+}
 

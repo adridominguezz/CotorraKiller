@@ -26,7 +26,6 @@
                 android:id="@+id/topAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="?attr/actionBarSize"
                 android:gravity="center"
                >
                 <LinearLayout
@@ -34,26 +33,7 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
-                    <!--TAMAÑO PANTALLA-->
-<!--                    <androidx.appcompat.widget.LinearLayoutCompat-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:orientation="vertical"-->
-<!--                        >-->
-<!--                        <TextView-->
-<!--                            android:id="@+id/AnchoTV"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:textColor="@color/md_theme_light_onTertiary"-->
-<!--                            android:text="@string/AnchoTV"/>-->
 
-<!--                        <TextView-->
-<!--                            android:id="@+id/AltoTV"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:textColor="@color/md_theme_light_onTertiary"-->
-<!--                            android:text="@string/AltoTV" />-->
-<!--                    </androidx.appcompat.widget.LinearLayoutCompat>-->
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="70dp"
@@ -102,6 +82,17 @@
                         android:textColor="@color/md_theme_light_onTertiary"
                         android:textSize="30dp"
                         android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnPausa"
+                        android:layout_width="31dp"
+                        android:layout_height="39dp"
+                        android:background="@android:color/transparent"
+                        android:onClick="menu"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/baseline_menu_24" />
 
                 </LinearLayout>
 

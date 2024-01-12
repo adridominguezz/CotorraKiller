@@ -9,30 +9,18 @@
     android:layout_gravity="center"
     >
 
+
     <TextView
         android:id="@+id/tiempoTerminado"
-        android:text="@string/tiempoTerminado"
+        android:text="@string/juegoPausado"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:textSize="30dp"
-        android:textStyle="bold"/>
-    <TextView
-        android:id="@+id/hasMatado"
-        android:text="@string/hasMatado"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:textStyle="bold"/>
-    <TextView
-        android:id="@+id/cotorrasMuertas"
-        android:text="@string/cotorrasMuertas"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/black"
-        android:textSize="30dp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:padding="20dp"/>
+
+
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -40,12 +28,20 @@
         android:layout_marginStart="15dp"
         android:src="@drawable/cotorra_dead" />
     <Button
-        android:id="@+id/juegarDeNuevoBtn"
-        android:text="@string/juegarDeNuevo"
+        android:id="@+id/reanudarBtn"
+        android:text="@string/reanudar"
         android:background="@drawable/estilo_btn"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
+        android:textSize="25dp"/>
+    <Button
+        android:id="@+id/juegarDeNuevoBtn"
+        android:text="@string/nuevaPartida"
+        android:background="@drawable/estilo_btn"
+        android:layout_width="260dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:textSize="25dp"/>
     <Button
         android:id="@+id/irMenuBtn"
@@ -53,14 +49,21 @@
         android:background="@drawable/estilo_btn"
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:textSize="25dp"/>
-    <Button
-        android:id="@+id/irRankingBtn"
-        android:text="@string/irRanking"
-        android:background="@drawable/estilo_btn"
+    <RelativeLayout
         android:layout_width="260dp"
         android:layout_height="50dp"
-        android:layout_margin="5dp"
-        android:textSize="25dp"/>
+        android:layout_margin="10dp"
+        android:layout_marginBottom="20dp">
+        <Button
+            android:id="@+id/irRankingBtn"
+            android:text="@string/irRanking"
+            android:background="@drawable/estilo_btn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="25dp"
+            />
+    </RelativeLayout>
+
 </androidx.appcompat.widget.LinearLayoutCompat>

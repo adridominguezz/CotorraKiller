@@ -21,7 +21,7 @@ class PlayerAdapter (private val playersList:List<Jugador>): RecyclerView.Adapte
     override fun onBindViewHolder(holder: PlayerViewHolder, position: Int) {
         val currentItem = playersList[position]
 
-        holder.nombreJugadorRanking.text = currentItem.name
+        holder.nombreJugadorRanking.text = currentItem.name.toUpperCase()
         holder.emailJugadorRanking.text = currentItem.email
         holder.puntuacionJugadorRanking.text = currentItem.cotorras.toString()
     }

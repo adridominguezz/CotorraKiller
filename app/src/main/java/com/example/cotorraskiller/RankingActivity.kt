@@ -1,8 +1,10 @@
 package com.example.cotorraskiller
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,7 +56,6 @@ class RankingActivity : AppCompatActivity() {
             playerList.sortByDescending { it.cotorras }
 
             rellenarRecycler(playerList)
-            imprmir(playerList)
 
         }.addOnFailureListener { exception ->
             // Manejar errores si es necesario
@@ -69,9 +70,9 @@ class RankingActivity : AppCompatActivity() {
         recyclerView.adapter = playerAdapter
     }
 
-    private fun imprmir(playerList: ArrayList<Jugador>) {
-        var jugador1 = playerList[0].toString()
-        Toast.makeText(this, jugador1, Toast.LENGTH_SHORT).show()
+
+    fun volver(view: View) {
+        startActivity(Intent(this, MenuActivity::class.java))
     }
 
 }
