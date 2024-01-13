@@ -64,6 +64,7 @@ class MenuActivity : AppCompatActivity() {
 
 
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
@@ -95,7 +96,6 @@ class MenuActivity : AppCompatActivity() {
         //BOTON JUGAR
         btnJugar.setOnClickListener {
 
-
             var uidString: String = user?.uid.toString()
             var nameString: String = txtName.text.toString()
             var cotorras = txtCotorras.text.toString()
@@ -111,23 +111,15 @@ class MenuActivity : AppCompatActivity() {
         //Escucha el boton de editar imagen
 //        editImgBtn.setOnClickListener {
 //
-//            MaterialAlertDialogBuilder(this)
-//                .setTitle(resources.getString(R.string.seleccionImg))
-//                //Boton de galeria
-//                .setNeutralButton(resources.getString(R.string.Galeria)) { dialog, which ->
-//                    if (!ComprombarPermisoAlmacenamiento()){ //Si no se habilitó el permiso se solicita
-//                        SolicitarPermisoAlmacenamiento()
-//                    }else{
-//                        ElegirImagenGaleria() //Si se habilitó el permiso se elige
-//                    }
-//                }
-////                .setNegativeButton(resources.getString(R.string.irMenu)) { dialog, which ->
-////
-////                }
-////                .setPositiveButton(resources.getString(R.string.irRanking)) { dialog, which ->
-////
-////                }
+//            val dialogView = layoutInflater.inflate(R.layout.add_img, null)
+//            val dialog = MaterialAlertDialogBuilder(this)
+//                .setView(dialogView)
 //                .show()
+//
+//            val addImagen = dialogView.findViewById<Button>(R.id.addImgBtn)
+//            val urlImagen = dialogView.findViewById<TextView>(R.id.urlImagen).text
+//
+//
 //        }
 
     }

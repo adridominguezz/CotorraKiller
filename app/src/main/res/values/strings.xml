@@ -49,5 +49,6 @@
     <string name="juegoPausado">JUEGO PAUSADO</string>
     <string name="nuevaPartida">NUEVA PARTIDA</string>
     <string name="reanudar">REANUDAR</string>
+    <string name="url_img">URL IMAGEN</string>
 
 </resources>
