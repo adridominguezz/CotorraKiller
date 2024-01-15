@@ -50,5 +50,7 @@
     <string name="nuevaPartida">NUEVA PARTIDA</string>
     <string name="reanudar">REANUDAR</string>
     <string name="url_img">URL IMAGEN</string>
+    <string name="enalce_imagen">ENLACE IMAGEN</string>
+    <string name="icono">ICONO</string>
 
 </resources>

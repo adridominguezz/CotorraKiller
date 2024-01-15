@@ -41,6 +41,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var editTextEmail: EditText
     private lateinit var editTextPassword: EditText
     private lateinit var editTextConfirmPassword: EditText
+    private lateinit var editTextIcon: EditText
+    private lateinit var editTextImg: EditText
     private lateinit var btnRegistro: Button
     private lateinit var auth: FirebaseAuth
     private lateinit var imagenCircleView: CircleImageView
@@ -57,6 +59,8 @@ class RegisterActivity : AppCompatActivity() {
         editTextPassword = findViewById(R.id.editTextPassword)
         editTextConfirmPassword = findViewById(R.id.editTextConfirmPassword)
         editTextName = findViewById(R.id.editTextName)
+        editTextIcon = findViewById(R.id.editTextIcon)
+        editTextImg = findViewById(R.id.editTextImg)
 
 
 
@@ -68,6 +72,8 @@ class RegisterActivity : AppCompatActivity() {
             val logEmail: String = editTextEmail.text.toString()
             val logPassword: String = editTextPassword.text.toString()
             val logConfirmPassword: String = editTextConfirmPassword.text.toString()
+            val icon: String = editTextIcon.text.toString()
+            val img: String = editTextImg.text.toString()
 
             //Comprueba que los campos de email y contraseña no están vacios y que los campos de contraseña y confirmar contraseña sean iguales
             if ((checkEmpty(logEmail, logPassword)) && (logPassword == logConfirmPassword)){
@@ -81,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
                     editTextPassword.setFocusable(true)
 
                 } else{ //Si pasa las anteriores comprobaciones, pasa a registrar el jugador
-                    RegistrarJugadorFirebase(logEmail, logPassword, name)
+                    RegistrarJugadorFirebase(logEmail, logPassword, name, icon, img)
                 }
 
             }
@@ -93,7 +99,7 @@ class RegisterActivity : AppCompatActivity() {
 
 
 
-    private fun RegistrarJugadorFirebase(logEmail: String, logPassword: String, name: String) {
+    private fun RegistrarJugadorFirebase(logEmail: String, logPassword: String, name: String, icon: String, img: String) {
         auth.createUserWithEmailAndPassword(logEmail, logPassword)
             .addOnCompleteListener { task ->
                 if(task.isSuccessful){
@@ -116,7 +122,8 @@ class RegisterActivity : AppCompatActivity() {
                             "password" to logPassword,
                             "name" to name,
                             "cotorras" to contador,
-                            "imagen" to ""
+                            "imagen" to img,
+                            "icon" to icon
                             )
                     )
 

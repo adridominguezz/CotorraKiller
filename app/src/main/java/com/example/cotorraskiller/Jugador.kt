@@ -4,7 +4,9 @@ data class Jugador (
     val uid: String,
     val name: String,
     val email: String,
-    var cotorras: Long
+    var cotorras: Long,
+    val iconUrl: String,
+    val imgUrl: String
 )
 
 

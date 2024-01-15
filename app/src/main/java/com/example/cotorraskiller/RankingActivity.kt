@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,12 +30,15 @@ class RankingActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     lateinit var playerAdapter: PlayerAdapter
 
+    lateinit var iconView: ImageView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ranking)
-
         listarJugadores()
+
+
     }
 
     private fun listarJugadores(){
@@ -45,9 +49,11 @@ class RankingActivity : AppCompatActivity() {
                 val name = document.getString("name") ?: ""
                 val email = document.getString("email") ?: ""
                 val cotorras = document.getLong("cotorras") ?: 0
+                val imgUrl = document.getString("imagen") ?: ""
+                val iconUrl = document.getString("icon") ?: ""
 
                 // Crear un objeto Jugador con los campos deseados
-                val jugador = Jugador(uid, name, email, cotorras)
+                val jugador = Jugador(uid, name, email, cotorras, iconUrl, imgUrl)
 
                 // Agregar el jugador a la lista
                 playerList.add(jugador)
