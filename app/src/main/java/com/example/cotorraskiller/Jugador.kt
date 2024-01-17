@@ -1,5 +1,7 @@
 package com.example.cotorraskiller
 
+import java.io.Serializable
+
 data class Jugador (
     val uid: String,
     val name: String,
@@ -7,7 +9,7 @@ data class Jugador (
     var cotorras: Long,
     val iconUrl: String,
     val imgUrl: String
-)
+): Serializable
 
 
 
