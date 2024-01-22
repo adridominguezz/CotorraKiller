@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +26,8 @@ class JuegoActivity : AppCompatActivity() {
     lateinit var NOMBRE: String
     var COTORRA: Long = 0
     lateinit var imgCotorra: ImageView
+    lateinit var imgStar: ImageView
+    lateinit var imgCanario: ImageView
     lateinit var contadorKills: TextView
     lateinit var nombreJugador: TextView
     lateinit var tiempo: TextView
@@ -32,9 +35,6 @@ class JuegoActivity : AppCompatActivity() {
 
     var AnchoPantalla: Int =0
     var AltoPantalla: Int =0
-
-    lateinit var AltoTV: TextView
-    lateinit var AnchoTV: TextView
 
     lateinit var random: Random
 
@@ -60,21 +60,16 @@ class JuegoActivity : AppCompatActivity() {
         contadorKills = findViewById(R.id.contadorKills)
         nombreJugador = findViewById(R.id.nombreTextView)
         tiempo = findViewById(R.id.TiempoTextView)
-//        AltoTV = findViewById(R.id.AltoTV)
-//        AnchoTV = findViewById(R.id.AnchoTV)
 
         miDialog = Dialog(this)
 
         firebaseAuth = FirebaseAuth.getInstance()
-       // user = firebaseAuth.currentUser!!
         firebaseDatabase = FirebaseDatabase.getInstance()
         players = firebaseDatabase.getReference("players")
 
         val intent: Bundle? = intent.extras
         UID = intent?.getString("UID").toString()
         NOMBRE = intent?.getString("NAME").toString()
-//        var contador = intent?.getString("COTORRAS").toString()
-//        COTORRA = contador.toLong()
         COTORRA = 0
 
         contadorKills.text = COTORRA.toString()
@@ -85,18 +80,82 @@ class JuegoActivity : AppCompatActivity() {
 
 
         imgCotorra.setOnClickListener(){
+
+            var esCotorra: Boolean = (imgCotorra.drawable.constantState?.equals(ContextCompat.getDrawable(this, R.drawable.cotorra)?.constantState) == true)
             if (!GameOver) {
-                COTORRA++
-                contadorKills.text = COTORRA.toString()
 
-                imgCotorra.setImageResource(R.drawable.cotorra_dead)
+                if (esCotorra) {
+                    COTORRA++
+                    contadorKills.text = COTORRA.toString()
 
-                Handler().postDelayed({
-                    imgCotorra.setImageResource(R.drawable.cotorra)
-                    Movimiento()
-                }, velocidadCotorra)
+                    imgCotorra.setImageResource(R.drawable.cotorra_dead)
+
+                    Handler().postDelayed({
+                        imgCotorra.setImageResource(R.drawable.cotorra)
+                        Movimiento()
+                    }, velocidadCotorra)
+                }
             }
         }
+
+        // Después de inicializar las vistas
+        imgCanario = findViewById(R.id.imgCanario)
+        imgStar = findViewById(R.id.imgStar)
+
+        // Dentro de la función onCreate
+        val handler = Handler()
+
+        // ...
+
+        val aparecerImagenes = object : Runnable {
+            override fun run() {
+                val randomNum = random.nextInt(2)
+
+                // Generar coordenadas x e y aleatorias
+                val randomX = random.nextInt(AnchoPantalla - imgCanario.width*2)
+                val randomY = random.nextInt(AltoPantalla - imgCanario.height*2)
+
+                if (randomNum == 0) {
+                    imgCanario.visibility = View.VISIBLE
+                    imgCanario.x = randomX.toFloat()
+                    imgCanario.y = randomY.toFloat()
+
+                    Handler().postDelayed({
+                        imgCanario.visibility = View.INVISIBLE
+                    }, 2000)
+
+                    // Lógica de temporizador para imgCanario
+                    imgCanario.setOnClickListener {
+                        countDownTimer?.cancel()
+                        tiempoRestante -= 3000
+                        CuentaAtras()
+                        imgCanario.visibility = View.INVISIBLE
+                    }
+                } else {
+                    imgStar.visibility = View.VISIBLE
+                    imgStar.x = randomX.toFloat()
+                    imgStar.y = randomY.toFloat()
+
+                    Handler().postDelayed({
+                        imgStar.visibility = View.INVISIBLE
+                    }, 2000)
+                    // Lógica de temporizador para imgStar
+                    imgStar.setOnClickListener {
+                        countDownTimer?.cancel()
+                        tiempoRestante += 3000
+                        CuentaAtras()
+                        imgStar.visibility = View.INVISIBLE
+                    }
+                }
+
+                // Volver a programar la aparición de imágenes
+                handler.postDelayed(this, (random.nextInt(5000) + 2000).toLong())
+            }
+        }
+
+        // Iniciar el proceso de aparición de imágenes
+        handler.postDelayed(aparecerImagenes, (random.nextInt(5000) + 1000).toLong())
+
 
     }
     private fun Pantalla(){ //Metodo para obtener el tamaño de la pantalla
@@ -110,8 +169,6 @@ class JuegoActivity : AppCompatActivity() {
         var ancho = AnchoPantalla.toString()
         var alto = AltoPantalla.toString()
 
-//        AnchoTV.text = ancho
-//        AltoTV.text = alto
 
         random = Random()
     }
@@ -176,6 +233,8 @@ class JuegoActivity : AppCompatActivity() {
             .setMessage(resources.getString(R.string.hasMatado) + " " + cotorrasM + " cotorras")
             .setNeutralButton(resources.getString(R.string.juegarDeNuevo)) { dialog, which ->
                 COTORRA = 0
+                tiempoRestante=20000
+                CuentaAtras()
                 dialog.dismiss()
                 contadorKills.text = "0"
                 GameOver = false
@@ -260,7 +319,8 @@ class JuegoActivity : AppCompatActivity() {
 
         jugarNuevo.setOnClickListener {
             dialog.dismiss()
-            startActivity(Intent(this, JuegoActivity::class.java))
+            startActivity(Intent(this, MenuActivity::class.java))
+
         }
 
         menu.setOnClickListener {
